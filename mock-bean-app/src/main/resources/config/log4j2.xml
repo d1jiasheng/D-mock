@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Properties>
+        <Property name="LOG_EXCEPTION_CONVERSION_WORD">%xwEx</Property>
+        <Property name="LOG_LEVEL_PATTERN">%5p</Property>
+        <Property name="LOG_DATEFORMAT_PATTERN">yyyy-MM-dd HH:mm:ss.SSS</Property>
+        <Property name="CONSOLE_LOG_PATTERN">%clr{%d{${LOG_DATEFORMAT_PATTERN}}}{faint} %clr{${LOG_LEVEL_PATTERN}} %clr{%pid}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n${sys:LOG_EXCEPTION_CONVERSION_WORD}</Property>
+        <Property name="FILE_LOG_PATTERN">%d{${LOG_DATEFORMAT_PATTERN}} ${LOG_LEVEL_PATTERN} %pid --- [%t] %c{1} : %m%n${sys:LOG_EXCEPTION_CONVERSION_WORD}</Property>
+    </Properties>
+    <Appenders>
+        <RollingRandomAccessFile name="R" fileName="/export/Logs/Domains/mock-bean-app.example.com/server1/logs/server.log"
+                                 filePattern="/export/Logs/Domains/mock-bean-app.example.com/server1/logs/server.log.%d{yyyy-MM-dd}">
+            <PatternLayout pattern="${sys:FILE_LOG_PATTERN}">
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+        </RollingRandomAccessFile>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="${sys:FILE_LOG_PATTERN}"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <logger name="com.sz.mockbean" level="INFO" />
+
+        <Root level="INFO">
+            <AppenderRef ref="R"/>
+            <AppenderRef ref="STDOUT"/>
+        </Root>
+    </Loggers>
+</Configuration>
