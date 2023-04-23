@@ -1,8 +1,8 @@
 package com.sz.mockbean.service.impl;
 
-import com.sz.mockbean.dao.mapper.MockBeanMapper;
-import com.sz.mockbean.dao.po.MockBean;
-import com.sz.mockbean.dao.po.MockBeanExample;
+import com.sz.mockbean.mapper.MockBeanMapper;
+import com.sz.mockbean.po.MockBean;
+import com.sz.mockbean.po.MockBeanExample;
 import com.sz.mockbean.model.MockBeanModel;
 import com.sz.mockbean.service.MockBeanService;
 import org.springframework.beans.BeanUtils;

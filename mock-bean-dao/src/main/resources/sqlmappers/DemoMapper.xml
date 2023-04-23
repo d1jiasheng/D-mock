@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sz.mockbean.dao.mapper.DemoMapper">
-  <resultMap id="BaseResultMap" type="com.sz.mockbean.dao.po.Demo">
+<mapper namespace="com.sz.mockbean.mapper.DemoMapper">
+  <resultMap id="BaseResultMap" type="com.sz.mockbean.po.Demo">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="val" jdbcType="VARCHAR" property="val" />
   </resultMap>
@@ -66,7 +66,7 @@
   <sql id="Base_Column_List">
     id, val
   </sql>
-  <select id="selectByExample" parameterType="com.sz.mockbean.dao.po.DemoExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.sz.mockbean.po.DemoExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -90,17 +90,17 @@
     delete from demo
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.sz.mockbean.dao.po.DemoExample">
+  <delete id="deleteByExample" parameterType="com.sz.mockbean.po.DemoExample">
     delete from demo
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.sz.mockbean.dao.po.Demo">
+  <insert id="insert" parameterType="com.sz.mockbean.po.Demo">
     insert into demo (id, val)
     values (#{id,jdbcType=BIGINT}, #{val,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.sz.mockbean.dao.po.Demo">
+  <insert id="insertSelective" parameterType="com.sz.mockbean.po.Demo">
     insert into demo
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -119,7 +119,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.sz.mockbean.dao.po.DemoExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.sz.mockbean.po.DemoExample" resultType="java.lang.Long">
     select count(*) from demo
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -147,7 +147,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.sz.mockbean.dao.po.Demo">
+  <update id="updateByPrimaryKeySelective" parameterType="com.sz.mockbean.po.Demo">
     update demo
     <set>
       <if test="val != null">
@@ -156,7 +156,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.sz.mockbean.dao.po.Demo">
+  <update id="updateByPrimaryKey" parameterType="com.sz.mockbean.po.Demo">
     update demo
     set val = #{val,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}

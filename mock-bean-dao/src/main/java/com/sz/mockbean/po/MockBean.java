@@ -1,4 +1,4 @@
-package com.sz.mockbean.dao.po;
+package com.sz.mockbean.po;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

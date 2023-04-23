@@ -1,4 +1,4 @@
-package com.sz.mockbean.dao.codegenerator;
+package com.sz.mockbean.codegenerator;
 
 import com.google.common.base.CaseFormat;
 import org.mybatis.generator.api.IntrospectedTable;

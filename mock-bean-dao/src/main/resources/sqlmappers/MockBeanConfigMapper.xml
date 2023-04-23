@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sz.mockbean.mapper.MockBeanMapper">
-  <resultMap id="BaseResultMap" type="com.sz.mockbean.po.MockBean">
+<mapper namespace="com.sz.mockbean.mapper.MockBeanConfigMapper">
+  <resultMap id="BaseResultMap" type="com.sz.mockbean.po.MockBeanConfig">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="app_name" jdbcType="VARCHAR" property="appName" />
     <result column="bean_id" jdbcType="BIGINT" property="beanId" />
     <result column="bean_name" jdbcType="VARCHAR" property="beanName" />
     <result column="class_name" jdbcType="VARCHAR" property="className" />
     <result column="method_name" jdbcType="VARCHAR" property="methodName" />
-    <result column="mock_value" jdbcType="VARCHAR" property="mockValue" />
+    <result column="method_parameter" jdbcType="VARCHAR" property="methodParameter" />
     <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
@@ -72,16 +72,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, app_name, bean_id, bean_name, class_name, method_name, mock_value, is_delete, 
+    id, app_name, bean_id, bean_name, class_name, method_name, method_parameter, is_delete, 
     create_time, update_time
   </sql>
-  <select id="selectByExample" parameterType="com.sz.mockbean.po.MockBeanExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.sz.mockbean.po.MockBeanConfigExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from mockbean
+    from mockbean_config
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -92,31 +92,31 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from mockbean
+    from mockbean_config
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from mockbean
+    delete from mockbean_config
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.sz.mockbean.po.MockBeanExample">
-    delete from mockbean
+  <delete id="deleteByExample" parameterType="com.sz.mockbean.po.MockBeanConfigExample">
+    delete from mockbean_config
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.sz.mockbean.po.MockBean">
-    insert into mockbean (id, app_name, bean_id, 
+  <insert id="insert" parameterType="com.sz.mockbean.po.MockBeanConfig">
+    insert into mockbean_config (id, app_name, bean_id, 
       bean_name, class_name, method_name, 
-      mock_value, is_delete, create_time, 
+      method_parameter, is_delete, create_time, 
       update_time)
     values (#{id,jdbcType=BIGINT}, #{appName,jdbcType=VARCHAR}, #{beanId,jdbcType=BIGINT}, 
       #{beanName,jdbcType=VARCHAR}, #{className,jdbcType=VARCHAR}, #{methodName,jdbcType=VARCHAR}, 
-      #{mockValue,jdbcType=VARCHAR}, #{isDelete,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{methodParameter,jdbcType=VARCHAR}, #{isDelete,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.sz.mockbean.po.MockBean">
-    insert into mockbean
+  <insert id="insertSelective" parameterType="com.sz.mockbean.po.MockBeanConfig">
+    insert into mockbean_config
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -136,8 +136,8 @@
       <if test="methodName != null">
         method_name,
       </if>
-      <if test="mockValue != null">
-        mock_value,
+      <if test="methodParameter != null">
+        method_parameter,
       </if>
       <if test="isDelete != null">
         is_delete,
@@ -168,8 +168,8 @@
       <if test="methodName != null">
         #{methodName,jdbcType=VARCHAR},
       </if>
-      <if test="mockValue != null">
-        #{mockValue,jdbcType=VARCHAR},
+      <if test="methodParameter != null">
+        #{methodParameter,jdbcType=VARCHAR},
       </if>
       <if test="isDelete != null">
         #{isDelete,jdbcType=TINYINT},
@@ -182,14 +182,14 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.sz.mockbean.po.MockBeanExample" resultType="java.lang.Long">
-    select count(*) from mockbean
+  <select id="countByExample" parameterType="com.sz.mockbean.po.MockBeanConfigExample" resultType="java.lang.Long">
+    select count(*) from mockbean_config
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update mockbean
+    update mockbean_config
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
@@ -209,8 +209,8 @@
       <if test="record.methodName != null">
         method_name = #{record.methodName,jdbcType=VARCHAR},
       </if>
-      <if test="record.mockValue != null">
-        mock_value = #{record.mockValue,jdbcType=VARCHAR},
+      <if test="record.methodParameter != null">
+        method_parameter = #{record.methodParameter,jdbcType=VARCHAR},
       </if>
       <if test="record.isDelete != null">
         is_delete = #{record.isDelete,jdbcType=TINYINT},
@@ -227,14 +227,14 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update mockbean
+    update mockbean_config
     set id = #{record.id,jdbcType=BIGINT},
       app_name = #{record.appName,jdbcType=VARCHAR},
       bean_id = #{record.beanId,jdbcType=BIGINT},
       bean_name = #{record.beanName,jdbcType=VARCHAR},
       class_name = #{record.className,jdbcType=VARCHAR},
       method_name = #{record.methodName,jdbcType=VARCHAR},
-      mock_value = #{record.mockValue,jdbcType=VARCHAR},
+      method_parameter = #{record.methodParameter,jdbcType=VARCHAR},
       is_delete = #{record.isDelete,jdbcType=TINYINT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
@@ -242,8 +242,8 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.sz.mockbean.po.MockBean">
-    update mockbean
+  <update id="updateByPrimaryKeySelective" parameterType="com.sz.mockbean.po.MockBeanConfig">
+    update mockbean_config
     <set>
       <if test="appName != null">
         app_name = #{appName,jdbcType=VARCHAR},
@@ -260,8 +260,8 @@
       <if test="methodName != null">
         method_name = #{methodName,jdbcType=VARCHAR},
       </if>
-      <if test="mockValue != null">
-        mock_value = #{mockValue,jdbcType=VARCHAR},
+      <if test="methodParameter != null">
+        method_parameter = #{methodParameter,jdbcType=VARCHAR},
       </if>
       <if test="isDelete != null">
         is_delete = #{isDelete,jdbcType=TINYINT},
@@ -275,14 +275,14 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.sz.mockbean.po.MockBean">
-    update mockbean
+  <update id="updateByPrimaryKey" parameterType="com.sz.mockbean.po.MockBeanConfig">
+    update mockbean_config
     set app_name = #{appName,jdbcType=VARCHAR},
       bean_id = #{beanId,jdbcType=BIGINT},
       bean_name = #{beanName,jdbcType=VARCHAR},
       class_name = #{className,jdbcType=VARCHAR},
       method_name = #{methodName,jdbcType=VARCHAR},
-      mock_value = #{mockValue,jdbcType=VARCHAR},
+      method_parameter = #{methodParameter,jdbcType=VARCHAR},
       is_delete = #{isDelete,jdbcType=TINYINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
@@ -293,7 +293,7 @@
     <foreach collection="columns" item="col" separator=",">
       ${col}
     </foreach>
-    from mockbean
+    from mockbean_config
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

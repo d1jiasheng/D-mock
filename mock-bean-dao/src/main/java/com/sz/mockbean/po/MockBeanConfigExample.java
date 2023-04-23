@@ -1,17 +1,17 @@
-package com.sz.mockbean.dao.po;
+package com.sz.mockbean.po;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MockBeanExample {
+public class MockBeanConfigExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public MockBeanExample() {
+    public MockBeanConfigExample() {
         oredCriteria = new ArrayList<>();
     }
 
@@ -505,73 +505,73 @@ public class MockBeanExample {
             return (Criteria) this;
         }
 
-        public Criteria andMockValueIsNull() {
-            addCriterion("mock_value is null");
+        public Criteria andMethodParameterIsNull() {
+            addCriterion("method_parameter is null");
             return (Criteria) this;
         }
 
-        public Criteria andMockValueIsNotNull() {
-            addCriterion("mock_value is not null");
+        public Criteria andMethodParameterIsNotNull() {
+            addCriterion("method_parameter is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMockValueEqualTo(String value) {
-            addCriterion("mock_value =", value, "mockValue");
+        public Criteria andMethodParameterEqualTo(String value) {
+            addCriterion("method_parameter =", value, "methodParameter");
             return (Criteria) this;
         }
 
-        public Criteria andMockValueNotEqualTo(String value) {
-            addCriterion("mock_value <>", value, "mockValue");
+        public Criteria andMethodParameterNotEqualTo(String value) {
+            addCriterion("method_parameter <>", value, "methodParameter");
             return (Criteria) this;
         }
 
-        public Criteria andMockValueGreaterThan(String value) {
-            addCriterion("mock_value >", value, "mockValue");
+        public Criteria andMethodParameterGreaterThan(String value) {
+            addCriterion("method_parameter >", value, "methodParameter");
             return (Criteria) this;
         }
 
-        public Criteria andMockValueGreaterThanOrEqualTo(String value) {
-            addCriterion("mock_value >=", value, "mockValue");
+        public Criteria andMethodParameterGreaterThanOrEqualTo(String value) {
+            addCriterion("method_parameter >=", value, "methodParameter");
             return (Criteria) this;
         }
 
-        public Criteria andMockValueLessThan(String value) {
-            addCriterion("mock_value <", value, "mockValue");
+        public Criteria andMethodParameterLessThan(String value) {
+            addCriterion("method_parameter <", value, "methodParameter");
             return (Criteria) this;
         }
 
-        public Criteria andMockValueLessThanOrEqualTo(String value) {
-            addCriterion("mock_value <=", value, "mockValue");
+        public Criteria andMethodParameterLessThanOrEqualTo(String value) {
+            addCriterion("method_parameter <=", value, "methodParameter");
             return (Criteria) this;
         }
 
-        public Criteria andMockValueLike(String value) {
-            addCriterion("mock_value like", value, "mockValue");
+        public Criteria andMethodParameterLike(String value) {
+            addCriterion("method_parameter like", value, "methodParameter");
             return (Criteria) this;
         }
 
-        public Criteria andMockValueNotLike(String value) {
-            addCriterion("mock_value not like", value, "mockValue");
+        public Criteria andMethodParameterNotLike(String value) {
+            addCriterion("method_parameter not like", value, "methodParameter");
             return (Criteria) this;
         }
 
-        public Criteria andMockValueIn(List<String> values) {
-            addCriterion("mock_value in", values, "mockValue");
+        public Criteria andMethodParameterIn(List<String> values) {
+            addCriterion("method_parameter in", values, "methodParameter");
             return (Criteria) this;
         }
 
-        public Criteria andMockValueNotIn(List<String> values) {
-            addCriterion("mock_value not in", values, "mockValue");
+        public Criteria andMethodParameterNotIn(List<String> values) {
+            addCriterion("method_parameter not in", values, "methodParameter");
             return (Criteria) this;
         }
 
-        public Criteria andMockValueBetween(String value1, String value2) {
-            addCriterion("mock_value between", value1, value2, "mockValue");
+        public Criteria andMethodParameterBetween(String value1, String value2) {
+            addCriterion("method_parameter between", value1, value2, "methodParameter");
             return (Criteria) this;
         }
 
-        public Criteria andMockValueNotBetween(String value1, String value2) {
-            addCriterion("mock_value not between", value1, value2, "mockValue");
+        public Criteria andMethodParameterNotBetween(String value1, String value2) {
+            addCriterion("method_parameter not between", value1, value2, "methodParameter");
             return (Criteria) this;
         }
 
@@ -757,7 +757,7 @@ public class MockBeanExample {
     }
 
     /**
-     * mockbean
+     * mockbean_config
      */
     public static class Criteria extends GeneratedCriteria {
         protected Criteria() {

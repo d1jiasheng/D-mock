@@ -1,4 +1,4 @@
-package com.sz.mockbean.dao.codegenerator;
+package com.sz.mockbean.codegenerator;
 
 import org.mybatis.generator.api.dom.java.CompilationUnit;
 import org.mybatis.generator.codegen.mybatis3.javamapper.JavaMapperGenerator;

@@ -15,4 +15,6 @@ public @interface MockBean {
 
     long beanId();
 
+    String beanName() default "";
+
 }

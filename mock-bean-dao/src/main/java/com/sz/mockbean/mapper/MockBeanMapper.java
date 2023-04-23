@@ -1,8 +1,9 @@
-package com.sz.mockbean.dao.mapper;
+package com.sz.mockbean.mapper;
 
-import com.sz.mockbean.dao.po.MockBean;
-import com.sz.mockbean.dao.po.MockBeanExample;
+import com.sz.mockbean.po.MockBean;
+import com.sz.mockbean.po.MockBeanExample;
 import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

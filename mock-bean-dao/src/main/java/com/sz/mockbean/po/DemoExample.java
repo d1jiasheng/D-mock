@@ -1,4 +1,4 @@
-package com.sz.mockbean.dao.po;
+package com.sz.mockbean.po;
 
 import java.util.ArrayList;
 import java.util.List;

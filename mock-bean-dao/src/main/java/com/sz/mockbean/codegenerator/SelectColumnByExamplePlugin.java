@@ -1,4 +1,4 @@
-package com.sz.mockbean.dao.codegenerator;
+package com.sz.mockbean.codegenerator;
 
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
