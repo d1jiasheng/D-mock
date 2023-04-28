@@ -10,4 +10,6 @@ public interface DemoService {
 
     MockModel mock();
 
+    MockModel batchMock();
+
 }

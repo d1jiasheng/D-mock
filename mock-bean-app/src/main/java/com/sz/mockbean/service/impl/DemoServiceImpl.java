@@ -17,4 +17,10 @@ public class DemoServiceImpl implements DemoService {
     public MockModel mock() {
         return null;
     }
+
+    @MockBean(beanId = 2)
+    @Override
+    public MockModel batchMock() {
+        return null;
+    }
 }
