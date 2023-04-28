@@ -11,4 +11,6 @@ public interface MockBeanService {
     boolean create(MockBeanModel mockBeanModel);
 
     String pull(MockBeanModel mockBeanModel);
+
+
 }

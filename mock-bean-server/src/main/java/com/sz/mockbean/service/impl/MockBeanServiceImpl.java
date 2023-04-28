@@ -1,9 +1,10 @@
 package com.sz.mockbean.service.impl;
 
 import com.sz.mockbean.mapper.MockBeanMapper;
+import com.sz.mockbean.model.MockBeanModel;
+import com.sz.mockbean.model.request.AddMockBeanRequest;
 import com.sz.mockbean.po.MockBean;
 import com.sz.mockbean.po.MockBeanExample;
-import com.sz.mockbean.model.MockBeanModel;
 import com.sz.mockbean.service.MockBeanService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

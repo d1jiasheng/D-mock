@@ -8,6 +8,7 @@ import com.sz.mockbean.service.MockBeanConfigService;
 import com.sz.mockbean.service.MockBeanService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,6 +31,9 @@ public class MainController {
     @PostMapping("register")
     public ServerResponse<Boolean> register(@RequestBody List<MockBeanRegisterConfig> mockBeanRegisterConfigs) {
         log.info("[mockBean 服务端] mockBean注册接口入参 mockBeanModel:{}", JSON.toJSONString(mockBeanRegisterConfigs));
+        if (CollectionUtils.isEmpty(mockBeanRegisterConfigs)) {
+            return ServerResponse.success();
+        }
         return ServerResponse.success(mockBeanConfigService.bulkCreateMockBeanConfig(mockBeanRegisterConfigs));
     }
 

@@ -1,6 +1,7 @@
 package com.sz.mockbean.service;
 
 import com.sz.mockbean.model.MockBeanRegisterConfig;
+import com.sz.mockbean.model.vo.MockBeanRegisterConfigVo;
 
 import java.util.List;
 
@@ -11,4 +12,6 @@ import java.util.List;
 public interface MockBeanConfigService {
 
     boolean bulkCreateMockBeanConfig(List<MockBeanRegisterConfig> mockBeanRegisterConfig);
+
+    List<MockBeanRegisterConfigVo> getAllMockConfigByConditions(String appName, Long beanId);
 }
