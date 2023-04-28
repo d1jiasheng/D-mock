@@ -21,5 +21,5 @@ public class MockBeanRegisterConfig {
 
     private String methodName;
 
-    private List<String> methodParameter;
+    private List<MockBeanReturnParam> methodParameter;
 }

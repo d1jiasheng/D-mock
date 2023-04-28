@@ -2,12 +2,12 @@ package com.sz.mockbean.mapper;
 
 import com.sz.mockbean.po.MockBeanConfig;
 import com.sz.mockbean.po.MockBeanConfigExample;
-
-import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+
+import java.util.List;
 
 @Mapper
 public interface MockBeanConfigMapper {
@@ -44,4 +44,15 @@ public interface MockBeanConfigMapper {
             " </foreach>" +
             " </script>"})
     int bulkInsert(@Param("records") List<MockBeanConfig> records);
+
+    @Select({"<script>" +
+            " select * from mockbean_config where app_name = #{appName} and is_delete = 0 and bean_id in (" +
+            " <foreach item='r' collection='beanIds' separator=','>" +
+            " #{r}" +
+            " </foreach>" +
+            " )" +
+            " </script>"
+    })
+    List<MockBeanConfig> bulkSelectByAppNameAndBeanIds(@Param("appName") String appName,
+                                                       @Param("beanIds") List<Long> beanIds);
 }

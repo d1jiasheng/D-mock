@@ -19,4 +19,6 @@ public class MockBeanModel {
 
     private String methodName;
 
+    private String mockValue;
+
 }

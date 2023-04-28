@@ -30,6 +30,9 @@ public class MockBeanAop {
 
     @Around("MockBeanPointCut()")
     public Object execJAnnotation(ProceedingJoinPoint pjp) throws Throwable {
+        if (!mockBeanService.isMockBeanServiceOpen()) {
+            return pjp.proceed();
+        }
         MethodSignature signature = (MethodSignature) pjp.getSignature();
         Method method = signature.getMethod();
         String className = signature.getDeclaringType().getSimpleName();
