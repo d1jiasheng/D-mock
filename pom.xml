@@ -19,6 +19,7 @@
         <module>mock-bean-client</module>
         <module>mock-bean-core</module>
         <module>mock-bean-server</module>
+        <module>mock-bean-starter</module>
     </modules>
 
     <properties>
