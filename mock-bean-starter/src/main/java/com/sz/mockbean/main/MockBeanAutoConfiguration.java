@@ -4,6 +4,7 @@ import com.sz.mockbean.annotation.MockBeanAop;
 import com.sz.mockbean.common.mockbean.MockBeanConfig;
 import com.sz.mockbean.common.mockbean.MockBeanService;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import java.io.FileNotFoundException;
 
@@ -11,6 +12,7 @@ import java.io.FileNotFoundException;
  * @author dijiasheng
  * @date 2023/7/17
  */
+@Configuration
 public class MockBeanAutoConfiguration {
 
     @Bean

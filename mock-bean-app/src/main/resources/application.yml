@@ -8,7 +8,7 @@ logging:
   config: classpath:config/log4j2.xml
 
 mybatis:
-  mapper-locations: classpath*:/sqlmappers/*.xml
+  mapper-locations: classpath*:/mapper/*.xml
   executor-type: SIMPLE
   configuration:
     map-underscore-to-camel-case: true
