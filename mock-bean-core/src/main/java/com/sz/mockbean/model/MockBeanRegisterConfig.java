@@ -21,5 +21,10 @@ public class MockBeanRegisterConfig {
 
     private String methodName;
 
+    /**
+     * 被注册的类型 0方法 1局部变量
+     */
+    private Integer registerType;
+
     private List<MockBeanReturnParam> methodParameter;
 }

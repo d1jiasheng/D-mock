@@ -12,13 +12,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class DemoServiceImpl implements DemoService {
 
-    @MockBean(beanId = 1)
+    @MockBean(beanId = 6)
     @Override
     public MockModel mock() {
         return null;
     }
 
-    @MockBean(beanId = 2)
+    @MockBean(beanId = 9)
     @Override
     public MockModel batchMock() {
         return null;

@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
  * @date 2023/4/21
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE, ElementType.METHOD})
+@Target({ElementType.TYPE, ElementType.METHOD, ElementType.LOCAL_VARIABLE})
 public @interface MockBean {
 
     long beanId();
