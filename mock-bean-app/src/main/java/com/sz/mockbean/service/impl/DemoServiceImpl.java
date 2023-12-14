@@ -15,7 +15,9 @@ public class DemoServiceImpl implements DemoService {
     @MockBean(beanId = 881)
     @Override
     public MockModel mock() {
-        return null;
+        MockModel m = new MockModel();
+        m.setName("我试一试最近的值");
+        return m;
     }
 
     @MockBean(beanId = 992)

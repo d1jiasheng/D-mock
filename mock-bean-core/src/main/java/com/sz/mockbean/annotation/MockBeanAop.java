@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.sz.mockbean.common.mockbean.MockBeanConfig;
 import com.sz.mockbean.model.MockBeanClientHolder;
 import com.sz.mockbean.model.MockBeanModel;
+import com.sz.mockbean.model.WriteValueModel;
+import com.sz.mockbean.option.OperateService;
 import com.sz.mockbean.request.MockBeanProtocal;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -50,10 +52,13 @@ public class MockBeanAop {
         try {
             String mockResult = mockBeanClientHolder.write(genProtocal(annotation.beanId(), null, className, methodName));
             MockBeanProtocal result = null;
-            if (StringUtils.isEmpty(mockResult) || (result = JSON.parseObject(mockResult, MockBeanProtocal.class)) == null) {
-                return pjp.proceed();
+            if (StringUtils.isEmpty(mockResult) || (result = JSON.parseObject(mockResult, MockBeanProtocal.class)) == null
+                    || StringUtils.isEmpty(result.getMsg())) {
+                Object r = pjp.proceed();
+                OperateService.doWriteOperate(mockBeanClientHolder.getChannel(), genValueModel(annotation.beanId(), null, className, methodName, r));
+                return r;
             }
-            log.info("[mockBean 切面服务] serverResponse.data:{}", JSON.toJSONString(result.getMsg()));
+            log.info("[mockBean 切面服务] result.msg:{}", JSON.toJSONString(result.getMsg()));
             Object o = genMockResult(result.getMsg(), methodClass);
             log.info("[mockBean 切面服务] object:{}", JSON.toJSONString(o.getClass()));
             return o;
@@ -81,6 +86,18 @@ public class MockBeanAop {
         mockBeanModel.setClassName(className);
         mockBeanModel.setMethodName(methodName);
         return mockBeanModel;
+    }
+
+    private WriteValueModel genValueModel(Long beanId, String beanName, String className, String methodName,
+                                          Object o) {
+        WriteValueModel writeValueModel = new WriteValueModel();
+        writeValueModel.setBeanId(beanId);
+        writeValueModel.setAppName(mockBeanConfig.getAppName());
+        writeValueModel.setBeanName(beanName);
+        writeValueModel.setClassName(className);
+        writeValueModel.setMethodName(methodName);
+        writeValueModel.setLatestValue(o.getClass().isAssignableFrom(String.class) ? (String) o : JSON.toJSONString(o));
+        return writeValueModel;
     }
 
     private synchronized Long getSeqId() {

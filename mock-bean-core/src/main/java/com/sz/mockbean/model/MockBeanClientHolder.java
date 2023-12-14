@@ -121,10 +121,19 @@ public class MockBeanClientHolder implements InitializingBean, ApplicationContex
     }
 
     public String write(MockBeanProtocal p) throws InterruptedException {
-        map.put(p.getSeqId(), new MockBeanProtocal());
         this.channel.writeAndFlush(JSON.toJSONString(p)).sync();
-        Thread.sleep(100);
-        return JSON.toJSONString(map.remove(p.getSeqId()));
+        long start = System.currentTimeMillis();
+        while (true) {
+            MockBeanProtocal result = (MockBeanProtocal) map.get(p.getSeqId());
+            if (result != null) {
+                return JSON.toJSONString(result);
+            }
+            long cur = System.currentTimeMillis();
+            if (cur - start > 1000L) {
+                return null;
+            }
+        }
+
     }
 
     private MockBeanRegisterConfig genRegisterMethodConfig(MockBean mockBean, Method method, Class clz) {

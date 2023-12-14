@@ -2,6 +2,7 @@ package com.sz.mockbean.service.impl;
 
 import com.sz.mockbean.mapper.MockBeanMapper;
 import com.sz.mockbean.model.MockBeanModel;
+import com.sz.mockbean.model.WriteValueModel;
 import com.sz.mockbean.po.MockBean;
 import com.sz.mockbean.po.MockBeanExample;
 import com.sz.mockbean.service.MockBeanService;
@@ -33,6 +34,19 @@ public class MockBeanServiceImpl implements MockBeanService {
         mockBean.setUpdateTime(LocalDateTime.now());
         mockBeanMapper.insertSelective(mockBean);
         return true;
+    }
+
+    @Override
+    public void updateLatestValue(WriteValueModel writeValueModel) {
+        MockBean mockBean = new MockBean();
+        mockBean.setLatestValue(writeValueModel.getLatestValue());
+        mockBean.setUpdateTime(LocalDateTime.now());
+        MockBeanExample mockBeanExample = new MockBeanExample();
+        mockBeanExample.createCriteria().andAppNameEqualTo(writeValueModel.getAppName())
+                .andBeanIdEqualTo(writeValueModel.getBeanId())
+                .andClassNameEqualTo(writeValueModel.getClassName())
+                .andMethodNameEqualTo(writeValueModel.getMethodName());
+        mockBeanMapper.updateByExampleSelective(mockBean, mockBeanExample);
     }
 
     @Override

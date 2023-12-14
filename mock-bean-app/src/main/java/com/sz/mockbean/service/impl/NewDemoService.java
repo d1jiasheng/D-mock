@@ -12,7 +12,7 @@ public class NewDemoService {
 
     @MockBean(beanId = 32)
     public String newMock() {
-        return "";
+        return "我试试String最近的值";
     }
 
 }

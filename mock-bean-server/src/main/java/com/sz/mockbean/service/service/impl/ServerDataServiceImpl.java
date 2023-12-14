@@ -1,6 +1,7 @@
 package com.sz.mockbean.service.service.impl;
 
 import com.sz.mockbean.model.MockBeanModel;
+import com.sz.mockbean.model.WriteValueModel;
 import com.sz.mockbean.po.MockBean;
 import com.sz.mockbean.service.MockBeanService;
 import com.sz.mockbean.service.service.ServerDataService;
@@ -22,6 +23,19 @@ public class ServerDataServiceImpl implements ServerDataService {
     @Override
     public String getMockBeanResult(MockBeanModel mockBeanModel) {
         Optional<MockBean> mockBeanOpt = mockBeanService.getBeanModel(mockBeanModel);
-        return mockBeanOpt.map(MockBean::getMockValue).orElse(null);
+        return mockBeanOpt.map(
+                mockBean -> {
+                    if (mockBean.getUseMock() == 0) {
+                        return null;
+                    }
+                    return mockBean.getMockValue();
+                }
+        ).orElse(null);
     }
+
+    @Override
+    public void writeLatestValue(WriteValueModel writeValueModel) {
+        mockBeanService.updateLatestValue(writeValueModel);
+    }
+
 }

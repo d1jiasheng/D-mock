@@ -8,7 +8,9 @@
     <result column="bean_name" jdbcType="VARCHAR" property="beanName" />
     <result column="class_name" jdbcType="VARCHAR" property="className" />
     <result column="method_name" jdbcType="VARCHAR" property="methodName" />
+    <result column="use_mock" jdbcType="TINYINT" property="useMock" />
     <result column="mock_value" jdbcType="VARCHAR" property="mockValue" />
+    <result column="latest_value" jdbcType="VARCHAR" property="latestValue" />
     <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
@@ -72,8 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, app_name, bean_id, bean_name, class_name, method_name, mock_value, is_delete, 
-    create_time, update_time
+    id, app_name, bean_id, bean_name, class_name, method_name, use_mock, mock_value, 
+    latest_value, is_delete, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.sz.mockbean.po.MockBeanExample" resultMap="BaseResultMap">
     select
@@ -108,12 +110,14 @@
   <insert id="insert" parameterType="com.sz.mockbean.po.MockBean">
     insert into mockbean (id, app_name, bean_id, 
       bean_name, class_name, method_name, 
-      mock_value, is_delete, create_time, 
-      update_time)
+      use_mock, mock_value, latest_value, 
+      is_delete, create_time, update_time
+      )
     values (#{id,jdbcType=BIGINT}, #{appName,jdbcType=VARCHAR}, #{beanId,jdbcType=BIGINT}, 
       #{beanName,jdbcType=VARCHAR}, #{className,jdbcType=VARCHAR}, #{methodName,jdbcType=VARCHAR}, 
-      #{mockValue,jdbcType=VARCHAR}, #{isDelete,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{useMock,jdbcType=TINYINT}, #{mockValue,jdbcType=VARCHAR}, #{latestValue,jdbcType=VARCHAR}, 
+      #{isDelete,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.sz.mockbean.po.MockBean">
     insert into mockbean
@@ -136,8 +140,14 @@
       <if test="methodName != null">
         method_name,
       </if>
+      <if test="useMock != null">
+        use_mock,
+      </if>
       <if test="mockValue != null">
         mock_value,
+      </if>
+      <if test="latestValue != null">
+        latest_value,
       </if>
       <if test="isDelete != null">
         is_delete,
@@ -168,8 +178,14 @@
       <if test="methodName != null">
         #{methodName,jdbcType=VARCHAR},
       </if>
+      <if test="useMock != null">
+        #{useMock,jdbcType=TINYINT},
+      </if>
       <if test="mockValue != null">
         #{mockValue,jdbcType=VARCHAR},
+      </if>
+      <if test="latestValue != null">
+        #{latestValue,jdbcType=VARCHAR},
       </if>
       <if test="isDelete != null">
         #{isDelete,jdbcType=TINYINT},
@@ -209,8 +225,14 @@
       <if test="record.methodName != null">
         method_name = #{record.methodName,jdbcType=VARCHAR},
       </if>
+      <if test="record.useMock != null">
+        use_mock = #{record.useMock,jdbcType=TINYINT},
+      </if>
       <if test="record.mockValue != null">
         mock_value = #{record.mockValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.latestValue != null">
+        latest_value = #{record.latestValue,jdbcType=VARCHAR},
       </if>
       <if test="record.isDelete != null">
         is_delete = #{record.isDelete,jdbcType=TINYINT},
@@ -234,7 +256,9 @@
       bean_name = #{record.beanName,jdbcType=VARCHAR},
       class_name = #{record.className,jdbcType=VARCHAR},
       method_name = #{record.methodName,jdbcType=VARCHAR},
+      use_mock = #{record.useMock,jdbcType=TINYINT},
       mock_value = #{record.mockValue,jdbcType=VARCHAR},
+      latest_value = #{record.latestValue,jdbcType=VARCHAR},
       is_delete = #{record.isDelete,jdbcType=TINYINT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
@@ -260,8 +284,14 @@
       <if test="methodName != null">
         method_name = #{methodName,jdbcType=VARCHAR},
       </if>
+      <if test="useMock != null">
+        use_mock = #{useMock,jdbcType=TINYINT},
+      </if>
       <if test="mockValue != null">
         mock_value = #{mockValue,jdbcType=VARCHAR},
+      </if>
+      <if test="latestValue != null">
+        latest_value = #{latestValue,jdbcType=VARCHAR},
       </if>
       <if test="isDelete != null">
         is_delete = #{isDelete,jdbcType=TINYINT},
@@ -282,7 +312,9 @@
       bean_name = #{beanName,jdbcType=VARCHAR},
       class_name = #{className,jdbcType=VARCHAR},
       method_name = #{methodName,jdbcType=VARCHAR},
+      use_mock = #{useMock,jdbcType=TINYINT},
       mock_value = #{mockValue,jdbcType=VARCHAR},
+      latest_value = #{latestValue,jdbcType=VARCHAR},
       is_delete = #{isDelete,jdbcType=TINYINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}

@@ -34,7 +34,7 @@
                              targetPackage="com.sz.mockbean.mapper" targetProject="src/main/java"/>
 
         <!--<table tableName="demo" domainObjectName="Demo" mapperName="DemoMapper"/>-->
-        <!--<table tableName="mockbean" domainObjectName="MockBean" mapperName="MockBeanMapper"/>-->
-        <table tableName="mockbean_config" domainObjectName="MockBeanConfig" mapperName="MockBeanConfigMapper"/>
+        <table tableName="mockbean" domainObjectName="MockBean" mapperName="MockBeanMapper"/>
+        <!--<table tableName="mockbean_config" domainObjectName="MockBeanConfig" mapperName="MockBeanConfigMapper"/>-->
     </context>
 </generatorConfiguration>

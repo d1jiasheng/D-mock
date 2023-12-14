@@ -7,18 +7,9 @@ import lombok.Data;
  * @date 2023/4/21
  */
 @Data
-public class MockBeanModel {
+public class MockBeanModel extends BaseMockBeanModel {
 
-    private Long beanId;
-
-    private String appName;
-
-    private String beanName;
-
-    private String className;
-
-    private String methodName;
-
+    private static final long serialVersionUID = 2975342104542623925L;
     private String mockValue;
 
 }

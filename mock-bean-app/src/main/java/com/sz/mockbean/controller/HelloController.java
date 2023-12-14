@@ -40,7 +40,7 @@ public class HelloController {
     @PostMapping("mockBeanTest")
     @ResponseBody
     public String mockBeanTest() {
-        MockModel mockModel = demoService.mock();
-        return mockModel.getName();
+        String mockModel = newDemoService.newMock();
+        return mockModel;
     }
 }

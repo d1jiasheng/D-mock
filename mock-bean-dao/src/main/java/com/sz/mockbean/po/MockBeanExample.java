@@ -505,6 +505,66 @@ public class MockBeanExample {
             return (Criteria) this;
         }
 
+        public Criteria andUseMockIsNull() {
+            addCriterion("use_mock is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseMockIsNotNull() {
+            addCriterion("use_mock is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseMockEqualTo(Integer value) {
+            addCriterion("use_mock =", value, "useMock");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseMockNotEqualTo(Integer value) {
+            addCriterion("use_mock <>", value, "useMock");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseMockGreaterThan(Integer value) {
+            addCriterion("use_mock >", value, "useMock");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseMockGreaterThanOrEqualTo(Integer value) {
+            addCriterion("use_mock >=", value, "useMock");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseMockLessThan(Integer value) {
+            addCriterion("use_mock <", value, "useMock");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseMockLessThanOrEqualTo(Integer value) {
+            addCriterion("use_mock <=", value, "useMock");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseMockIn(List<Integer> values) {
+            addCriterion("use_mock in", values, "useMock");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseMockNotIn(List<Integer> values) {
+            addCriterion("use_mock not in", values, "useMock");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseMockBetween(Integer value1, Integer value2) {
+            addCriterion("use_mock between", value1, value2, "useMock");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseMockNotBetween(Integer value1, Integer value2) {
+            addCriterion("use_mock not between", value1, value2, "useMock");
+            return (Criteria) this;
+        }
+
         public Criteria andMockValueIsNull() {
             addCriterion("mock_value is null");
             return (Criteria) this;
@@ -572,6 +632,76 @@ public class MockBeanExample {
 
         public Criteria andMockValueNotBetween(String value1, String value2) {
             addCriterion("mock_value not between", value1, value2, "mockValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andLatestValueIsNull() {
+            addCriterion("latest_value is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLatestValueIsNotNull() {
+            addCriterion("latest_value is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLatestValueEqualTo(String value) {
+            addCriterion("latest_value =", value, "latestValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andLatestValueNotEqualTo(String value) {
+            addCriterion("latest_value <>", value, "latestValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andLatestValueGreaterThan(String value) {
+            addCriterion("latest_value >", value, "latestValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andLatestValueGreaterThanOrEqualTo(String value) {
+            addCriterion("latest_value >=", value, "latestValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andLatestValueLessThan(String value) {
+            addCriterion("latest_value <", value, "latestValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andLatestValueLessThanOrEqualTo(String value) {
+            addCriterion("latest_value <=", value, "latestValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andLatestValueLike(String value) {
+            addCriterion("latest_value like", value, "latestValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andLatestValueNotLike(String value) {
+            addCriterion("latest_value not like", value, "latestValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andLatestValueIn(List<String> values) {
+            addCriterion("latest_value in", values, "latestValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andLatestValueNotIn(List<String> values) {
+            addCriterion("latest_value not in", values, "latestValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andLatestValueBetween(String value1, String value2) {
+            addCriterion("latest_value between", value1, value2, "latestValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andLatestValueNotBetween(String value1, String value2) {
+            addCriterion("latest_value not between", value1, value2, "latestValue");
             return (Criteria) this;
         }
 

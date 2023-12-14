@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.sz.mockbean.common.mockbean.MockBeanConfig;
 import com.sz.mockbean.model.MockBeanModel;
 import com.sz.mockbean.model.MockBeanRegisterConfig;
+import com.sz.mockbean.model.WriteValueModel;
 import com.sz.mockbean.request.MockBeanProtocal;
 import com.sz.mockbean.service.MockBeanConfigService;
 import com.sz.mockbean.service.MockBeanService;
@@ -37,8 +38,6 @@ public class MockBeanServerHolder implements InitializingBean {
 
     @Autowired
     private MockBeanConfigService mockBeanConfigService;
-    @Autowired
-    private MockBeanService mockBeanService;
     @Autowired
     private ServerDataService serverDataService;
 
@@ -81,15 +80,17 @@ public class MockBeanServerHolder implements InitializingBean {
         protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
             try {
                 MockBeanProtocal mbp = JSON.parseObject(msg, MockBeanProtocal.class);
+                log.info("[ChannelJsonInHandler] channelRead0 mbp:{}", JSON.toJSONString(mbp));
                 switch (mbp.getAction()) {
                     case "registry":
-                        log.info(JSON.toJSONString(mbp));
                         mockBeanConfigService.bulkCreateMockBeanConfig(JSON.parseArray(mbp.getMsg(), MockBeanRegisterConfig.class));
                         break;
                     case "request":
-                        log.info(JSON.toJSONString(mbp));
                         String result = serverDataService.getMockBeanResult(JSON.parseObject(mbp.getMsg(), MockBeanModel.class));
                         ctx.channel().writeAndFlush(JSON.toJSONString(genMockBeanProtocal(mbp.getSeqId(), result, "request")));
+                        break;
+                    case "write":
+                        serverDataService.writeLatestValue(JSON.parseObject(mbp.getMsg(), WriteValueModel.class));
                         break;
                     default:
                         log.info("unknow message");

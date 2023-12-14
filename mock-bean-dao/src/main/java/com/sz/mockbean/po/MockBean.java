@@ -35,9 +35,19 @@ public class MockBean implements Serializable {
     private String methodName;
 
     /**
+     * 是否启用mock
+     */
+    private Integer useMock;
+
+    /**
      * 
      */
     private String mockValue;
+
+    /**
+     * 
+     */
+    private String latestValue;
 
     /**
      * 
@@ -68,7 +78,11 @@ public class MockBean implements Serializable {
 
     public static final String METHOD_NAME = "methodName";
 
+    public static final String USE_MOCK = "useMock";
+
     public static final String MOCK_VALUE = "mockValue";
+
+    public static final String LATEST_VALUE = "latestValue";
 
     public static final String IS_DELETE = "isDelete";
 
@@ -173,6 +187,22 @@ public class MockBean implements Serializable {
     }
 
     /**
+     * 是否启用mock
+     * @return use_mock 是否启用mock
+     */
+    public Integer getUseMock() {
+        return useMock;
+    }
+
+    /**
+     * 是否启用mock
+     * @param useMock 是否启用mock
+     */
+    public void setUseMock(Integer useMock) {
+        this.useMock = useMock;
+    }
+
+    /**
      * 
      * @return mock_value 
      */
@@ -186,6 +216,22 @@ public class MockBean implements Serializable {
      */
     public void setMockValue(String mockValue) {
         this.mockValue = mockValue;
+    }
+
+    /**
+     * 
+     * @return latest_value 
+     */
+    public String getLatestValue() {
+        return latestValue;
+    }
+
+    /**
+     * 
+     * @param latestValue 
+     */
+    public void setLatestValue(String latestValue) {
+        this.latestValue = latestValue;
     }
 
     /**
@@ -248,7 +294,9 @@ public class MockBean implements Serializable {
         sb.append(", beanName=").append(beanName);
         sb.append(", className=").append(className);
         sb.append(", methodName=").append(methodName);
+        sb.append(", useMock=").append(useMock);
         sb.append(", mockValue=").append(mockValue);
+        sb.append(", latestValue=").append(latestValue);
         sb.append(", isDelete=").append(isDelete);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);

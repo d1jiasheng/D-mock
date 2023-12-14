@@ -1,6 +1,7 @@
 package com.sz.mockbean.service.service;
 
 import com.sz.mockbean.model.MockBeanModel;
+import com.sz.mockbean.model.WriteValueModel;
 
 /**
  * @author dijiasheng
@@ -9,4 +10,6 @@ import com.sz.mockbean.model.MockBeanModel;
 public interface ServerDataService {
 
     String getMockBeanResult(MockBeanModel mockBeanModel);
+
+    void writeLatestValue(WriteValueModel writeValueModel);
 }
