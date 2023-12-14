@@ -22,9 +22,14 @@ public class MockBeanRegisterConfig {
     private String methodName;
 
     /**
-     * 被注册的类型 0方法 1局部变量
+     * 被注册的类型 0方法
      */
     private Integer registerType;
+    /**
+     * 返回类型
+     * @see com.sz.mockbean.constant.MockBeanReturnTypeEnum
+     */
+    private Integer returnType;
 
     private List<MockBeanReturnParam> methodParameter;
 }

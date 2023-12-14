@@ -7,6 +7,7 @@ import com.sz.mockbean.model.MockBeanModel;
 import com.sz.mockbean.request.MockBeanProtocal;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -49,11 +50,11 @@ public class MockBeanAop {
         try {
             String mockResult = mockBeanClientHolder.write(genProtocal(annotation.beanId(), null, className, methodName));
             MockBeanProtocal result = null;
-            if (mockResult == null || (result = JSON.parseObject(mockResult, MockBeanProtocal.class)) == null) {
+            if (StringUtils.isEmpty(mockResult) || (result = JSON.parseObject(mockResult, MockBeanProtocal.class)) == null) {
                 return pjp.proceed();
             }
             log.info("[mockBean 切面服务] serverResponse.data:{}", JSON.toJSONString(result.getMsg()));
-            Object o = JSON.parseObject(result.getMsg(), methodClass);
+            Object o = genMockResult(result.getMsg(), methodClass);
             log.info("[mockBean 切面服务] object:{}", JSON.toJSONString(o.getClass()));
             return o;
         } catch (Exception e) {
@@ -84,5 +85,15 @@ public class MockBeanAop {
 
     private synchronized Long getSeqId() {
         return COUNT += 1;
+    }
+
+    private Object genMockResult(String msg, Class<?> returnType) {
+        if (returnType.isAssignableFrom(String.class)) {
+            return msg;
+        }
+        if (returnType.isAssignableFrom(Integer.class)) {
+            return Integer.parseInt(msg);
+        }
+        return JSON.parseObject(msg, returnType);
     }
 }

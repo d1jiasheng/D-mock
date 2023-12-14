@@ -505,6 +505,66 @@ public class MockBeanConfigExample {
             return (Criteria) this;
         }
 
+        public Criteria andReturnTypeIsNull() {
+            addCriterion("return_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReturnTypeIsNotNull() {
+            addCriterion("return_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReturnTypeEqualTo(Integer value) {
+            addCriterion("return_type =", value, "returnType");
+            return (Criteria) this;
+        }
+
+        public Criteria andReturnTypeNotEqualTo(Integer value) {
+            addCriterion("return_type <>", value, "returnType");
+            return (Criteria) this;
+        }
+
+        public Criteria andReturnTypeGreaterThan(Integer value) {
+            addCriterion("return_type >", value, "returnType");
+            return (Criteria) this;
+        }
+
+        public Criteria andReturnTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("return_type >=", value, "returnType");
+            return (Criteria) this;
+        }
+
+        public Criteria andReturnTypeLessThan(Integer value) {
+            addCriterion("return_type <", value, "returnType");
+            return (Criteria) this;
+        }
+
+        public Criteria andReturnTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("return_type <=", value, "returnType");
+            return (Criteria) this;
+        }
+
+        public Criteria andReturnTypeIn(List<Integer> values) {
+            addCriterion("return_type in", values, "returnType");
+            return (Criteria) this;
+        }
+
+        public Criteria andReturnTypeNotIn(List<Integer> values) {
+            addCriterion("return_type not in", values, "returnType");
+            return (Criteria) this;
+        }
+
+        public Criteria andReturnTypeBetween(Integer value1, Integer value2) {
+            addCriterion("return_type between", value1, value2, "returnType");
+            return (Criteria) this;
+        }
+
+        public Criteria andReturnTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("return_type not between", value1, value2, "returnType");
+            return (Criteria) this;
+        }
+
         public Criteria andMethodParameterIsNull() {
             addCriterion("method_parameter is null");
             return (Criteria) this;

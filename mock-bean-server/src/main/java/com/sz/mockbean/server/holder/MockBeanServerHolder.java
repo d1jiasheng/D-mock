@@ -7,6 +7,7 @@ import com.sz.mockbean.model.MockBeanRegisterConfig;
 import com.sz.mockbean.request.MockBeanProtocal;
 import com.sz.mockbean.service.MockBeanConfigService;
 import com.sz.mockbean.service.MockBeanService;
+import com.sz.mockbean.service.service.ServerDataService;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -38,6 +39,8 @@ public class MockBeanServerHolder implements InitializingBean {
     private MockBeanConfigService mockBeanConfigService;
     @Autowired
     private MockBeanService mockBeanService;
+    @Autowired
+    private ServerDataService serverDataService;
 
 
     @Override
@@ -85,7 +88,7 @@ public class MockBeanServerHolder implements InitializingBean {
                         break;
                     case "request":
                         log.info(JSON.toJSONString(mbp));
-                        String result = mockBeanService.pull(JSON.parseObject(mbp.getMsg(), MockBeanModel.class));
+                        String result = serverDataService.getMockBeanResult(JSON.parseObject(mbp.getMsg(), MockBeanModel.class));
                         ctx.channel().writeAndFlush(JSON.toJSONString(genMockBeanProtocal(mbp.getSeqId(), result, "request")));
                         break;
                     default:

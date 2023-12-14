@@ -37,10 +37,10 @@ public interface MockBeanConfigMapper {
 
     @Update({"<script>" +
             " insert into mockbean_config" +
-            " (app_name, bean_id, bean_name, class_name, method_name, method_parameter, is_delete, create_time)" +
+            " (app_name, bean_id, bean_name, class_name, method_name, method_parameter, is_delete, create_time, return_type)" +
             " values" +
             " <foreach item='r' collection='records' separator=','>" +
-            " (#{r.appName}, #{r.beanId}, #{r.beanName}, #{r.className}, #{r.methodName}, #{r.methodParameter}, #{r.isDelete}, #{r.createTime})" +
+            " (#{r.appName}, #{r.beanId}, #{r.beanName}, #{r.className}, #{r.methodName}, #{r.methodParameter}, #{r.isDelete}, #{r.createTime}, #{r.returnType})" +
             " </foreach>" +
             " </script>"})
     int bulkInsert(@Param("records") List<MockBeanConfig> records);

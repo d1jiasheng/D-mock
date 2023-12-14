@@ -2,15 +2,17 @@ package com.sz.mockbean.service.impl;
 
 import com.sz.mockbean.mapper.MockBeanMapper;
 import com.sz.mockbean.model.MockBeanModel;
-import com.sz.mockbean.model.request.AddMockBeanRequest;
 import com.sz.mockbean.po.MockBean;
 import com.sz.mockbean.po.MockBeanExample;
 import com.sz.mockbean.service.MockBeanService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * @author dijiasheng
@@ -42,5 +44,20 @@ public class MockBeanServiceImpl implements MockBeanService {
                 .andMethodNameEqualTo(mockBeanModel.getMethodName())
                 .andIsDeleteEqualTo(0);
         return mockBeanMapper.selectByExample(mockBeanExample).get(0).getMockValue();
+    }
+
+    @Override
+    public Optional<MockBean> getBeanModel(MockBeanModel mockBeanModel) {
+        MockBeanExample mockBeanExample = new MockBeanExample();
+        mockBeanExample.createCriteria().andAppNameEqualTo(mockBeanModel.getAppName())
+                .andBeanIdEqualTo(mockBeanModel.getBeanId())
+                .andClassNameEqualTo(mockBeanModel.getClassName())
+                .andMethodNameEqualTo(mockBeanModel.getMethodName())
+                .andIsDeleteEqualTo(0);
+        List<MockBean> mockBeanList = mockBeanMapper.selectByExample(mockBeanExample);
+        if (CollectionUtils.isEmpty(mockBeanList)) {
+            return Optional.empty();
+        }
+        return Optional.ofNullable(mockBeanList.get(0));
     }
 }

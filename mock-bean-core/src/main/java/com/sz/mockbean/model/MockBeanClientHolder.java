@@ -3,6 +3,7 @@ package com.sz.mockbean.model;
 import com.alibaba.fastjson.JSON;
 import com.sz.mockbean.annotation.MockBean;
 import com.sz.mockbean.common.mockbean.MockBeanConfig;
+import com.sz.mockbean.constant.MockBeanReturnTypeEnum;
 import com.sz.mockbean.option.OperateService;
 import com.sz.mockbean.request.MockBeanProtocal;
 import io.netty.bootstrap.Bootstrap;
@@ -127,6 +128,16 @@ public class MockBeanClientHolder implements InitializingBean, ApplicationContex
     }
 
     private MockBeanRegisterConfig genRegisterMethodConfig(MockBean mockBean, Method method, Class clz) {
+        Integer resultType;
+        Class typeClz = method.getReturnType();
+        if (typeClz.isAssignableFrom(String.class)) {
+            resultType = MockBeanReturnTypeEnum.STRING.getCode();
+        } else if (typeClz.isAssignableFrom(Integer.class)) {
+            resultType = MockBeanReturnTypeEnum.INTEGER.getCode();
+        } else {
+            resultType = MockBeanReturnTypeEnum.OBJECT.getCode();
+        }
+
         MockBeanRegisterConfig config = new MockBeanRegisterConfig();
         config.setAppName(mockBeanConfig.getAppName());
         config.setBeanId(mockBean.beanId());
@@ -134,7 +145,11 @@ public class MockBeanClientHolder implements InitializingBean, ApplicationContex
         config.setClassName(clz.getSimpleName().split(splitchar)[0]);
         config.setMethodName(method.getName());
         config.setRegisterType(0);
+        config.setReturnType(resultType);
 
+        if (resultType != 0) {
+            return config;
+        }
         List<MockBeanReturnParam> returnParams = new ArrayList<>();
         Field[] methodField = method.getReturnType().getDeclaredFields();
         for (Field field : methodField) {

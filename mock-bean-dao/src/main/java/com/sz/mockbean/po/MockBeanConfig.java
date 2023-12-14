@@ -37,6 +37,11 @@ public class MockBeanConfig implements Serializable {
     /**
      * 
      */
+    private Integer returnType;
+
+    /**
+     * 
+     */
     private String methodParameter;
 
     /**
@@ -67,6 +72,8 @@ public class MockBeanConfig implements Serializable {
     public static final String CLASS_NAME = "className";
 
     public static final String METHOD_NAME = "methodName";
+
+    public static final String RETURN_TYPE = "returnType";
 
     public static final String METHOD_PARAMETER = "methodParameter";
 
@@ -174,6 +181,22 @@ public class MockBeanConfig implements Serializable {
 
     /**
      * 
+     * @return return_type 
+     */
+    public Integer getReturnType() {
+        return returnType;
+    }
+
+    /**
+     * 
+     * @param returnType 
+     */
+    public void setReturnType(Integer returnType) {
+        this.returnType = returnType;
+    }
+
+    /**
+     * 
      * @return method_parameter 
      */
     public String getMethodParameter() {
@@ -248,6 +271,7 @@ public class MockBeanConfig implements Serializable {
         sb.append(", beanName=").append(beanName);
         sb.append(", className=").append(className);
         sb.append(", methodName=").append(methodName);
+        sb.append(", returnType=").append(returnType);
         sb.append(", methodParameter=").append(methodParameter);
         sb.append(", isDelete=").append(isDelete);
         sb.append(", createTime=").append(createTime);

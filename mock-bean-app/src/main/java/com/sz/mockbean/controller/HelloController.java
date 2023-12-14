@@ -1,10 +1,10 @@
 package com.sz.mockbean.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.sz.mockbean.model.MockBeanClientHolder;
 import com.sz.mockbean.model.MockModel;
 import com.sz.mockbean.request.MockBeanProtocal;
 import com.sz.mockbean.service.DemoService;
+import com.sz.mockbean.service.impl.NewDemoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +25,8 @@ public class HelloController {
     private DemoService demoService;
     @Autowired
     private MockBeanClientHolder holder;
+    @Autowired
+    private NewDemoService newDemoService;
 
     @ResponseBody
     @RequestMapping("test")
@@ -39,6 +41,6 @@ public class HelloController {
     @ResponseBody
     public String mockBeanTest() {
         MockModel mockModel = demoService.mock();
-        return JSON.toJSONString(mockModel);
+        return mockModel.getName();
     }
 }
