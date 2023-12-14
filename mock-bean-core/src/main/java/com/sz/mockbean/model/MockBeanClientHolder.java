@@ -1,11 +1,9 @@
-package com.sz.mockbean.other;
+package com.sz.mockbean.model;
 
 import com.alibaba.fastjson.JSON;
 import com.sz.mockbean.annotation.MockBean;
 import com.sz.mockbean.common.mockbean.MockBeanConfig;
-import com.sz.mockbean.model.MockBeanRegisterConfig;
-import com.sz.mockbean.model.MockBeanReturnParam;
-import com.sz.mockbean.option.RegistryOperateService;
+import com.sz.mockbean.option.OperateService;
 import com.sz.mockbean.request.MockBeanProtocal;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
@@ -29,7 +27,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -50,6 +47,10 @@ public class MockBeanClientHolder implements InitializingBean, ApplicationContex
 
     public MockBeanClientHolder(MockBeanConfig mockBeanConfig) {
         this.mockBeanConfig = mockBeanConfig;
+    }
+
+    public Channel getChannel() {
+        return this.channel;
     }
 
     @Override
@@ -100,7 +101,7 @@ public class MockBeanClientHolder implements InitializingBean, ApplicationContex
         }
         //注册到server
         if (!CollectionUtils.isEmpty(mockBeanRegisterConfigs)) {
-            RegistryOperateService.doRegistryOperate(channel, mockBeanRegisterConfigs);
+            OperateService.doRegistryOperate(channel, mockBeanRegisterConfigs);
         }
     }
 
@@ -112,15 +113,15 @@ public class MockBeanClientHolder implements InitializingBean, ApplicationContex
     private class ChannelJsonInHandler extends SimpleChannelInboundHandler<String> {
 
         @Override
-        protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
+        protected void channelRead0(ChannelHandlerContext ctx, String msg) {
             MockBeanProtocal readRes = JSON.parseObject(msg, MockBeanProtocal.class);
             map.put(readRes.getSeqId(), readRes);
         }
     }
 
-    public String write(MockBeanProtocal p) throws ExecutionException, InterruptedException {
+    public String write(MockBeanProtocal p) throws InterruptedException {
         map.put(p.getSeqId(), new MockBeanProtocal());
-        ChannelFuture f = this.channel.writeAndFlush(JSON.toJSONString(p)).sync();
+        this.channel.writeAndFlush(JSON.toJSONString(p)).sync();
         Thread.sleep(100);
         return JSON.toJSONString(map.remove(p.getSeqId()));
     }

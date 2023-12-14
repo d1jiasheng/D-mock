@@ -1,8 +1,10 @@
 package com.sz.mockbean.annotation;
 
 import com.alibaba.fastjson.JSON;
-import com.sz.mockbean.common.mockbean.MockBeanService;
-import com.sz.mockbean.response.ServerResponse;
+import com.sz.mockbean.common.mockbean.MockBeanConfig;
+import com.sz.mockbean.model.MockBeanClientHolder;
+import com.sz.mockbean.model.MockBeanModel;
+import com.sz.mockbean.request.MockBeanProtocal;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -22,7 +24,11 @@ import java.lang.reflect.Method;
 @AllArgsConstructor
 public class MockBeanAop {
 
-    private MockBeanService mockBeanService;
+    private static long COUNT = 0;
+
+    private MockBeanClientHolder mockBeanClientHolder;
+
+    private MockBeanConfig mockBeanConfig;
 
     @Pointcut("@annotation(com.sz.mockbean.annotation.MockBean)")
     public void MockBeanPointCut() {
@@ -30,7 +36,7 @@ public class MockBeanAop {
 
     @Around("MockBeanPointCut()")
     public Object execJAnnotation(ProceedingJoinPoint pjp) throws Throwable {
-        if (!mockBeanService.isMockBeanServiceOpen()) {
+        if (!mockBeanConfig.getServiceOpen()) {
             return pjp.proceed();
         }
         MethodSignature signature = (MethodSignature) pjp.getSignature();
@@ -41,13 +47,13 @@ public class MockBeanAop {
 
         MockBean annotation = method.getAnnotation(MockBean.class);
         try {
-            String mockResult = mockBeanService.pullMockBean(annotation.beanId(), null, className, methodName);
-            if (mockResult == null) {
+            String mockResult = mockBeanClientHolder.write(genProtocal(annotation.beanId(), null, className, methodName));
+            MockBeanProtocal result = null;
+            if (mockResult == null || (result = JSON.parseObject(mockResult, MockBeanProtocal.class)) == null) {
                 return pjp.proceed();
             }
-            ServerResponse<String> serverResponse = JSON.parseObject(mockResult, ServerResponse.class);
-            log.info("[mockBean 切面服务] serverResponse.data:{}", JSON.toJSONString(serverResponse.getData()));
-            Object o = JSON.parseObject(serverResponse.getData(), methodClass);
+            log.info("[mockBean 切面服务] serverResponse.data:{}", JSON.toJSONString(result.getMsg()));
+            Object o = JSON.parseObject(result.getMsg(), methodClass);
             log.info("[mockBean 切面服务] object:{}", JSON.toJSONString(o.getClass()));
             return o;
         } catch (Exception e) {
@@ -55,5 +61,28 @@ public class MockBeanAop {
             return pjp.proceed();
         }
 
+    }
+
+    private MockBeanProtocal genProtocal(Long beanId, String beanName, String className, String methodName) {
+        MockBeanModel model = genBeanModel(beanId, beanName, className, methodName);
+        MockBeanProtocal protocal = new MockBeanProtocal();
+        protocal.setSeqId(getSeqId().toString());
+        protocal.setAction("request");
+        protocal.setMsg(JSON.toJSONString(model));
+        return protocal;
+    }
+
+    private MockBeanModel genBeanModel(Long beanId, String beanName, String className, String methodName) {
+        MockBeanModel mockBeanModel = new MockBeanModel();
+        mockBeanModel.setBeanId(beanId);
+        mockBeanModel.setAppName(mockBeanConfig.getAppName());
+        mockBeanModel.setBeanName(beanName);
+        mockBeanModel.setClassName(className);
+        mockBeanModel.setMethodName(methodName);
+        return mockBeanModel;
+    }
+
+    private synchronized Long getSeqId() {
+        return COUNT += 1;
     }
 }

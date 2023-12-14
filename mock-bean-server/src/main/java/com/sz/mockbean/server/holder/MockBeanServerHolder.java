@@ -2,9 +2,11 @@ package com.sz.mockbean.server.holder;
 
 import com.alibaba.fastjson.JSON;
 import com.sz.mockbean.common.mockbean.MockBeanConfig;
+import com.sz.mockbean.model.MockBeanModel;
 import com.sz.mockbean.model.MockBeanRegisterConfig;
 import com.sz.mockbean.request.MockBeanProtocal;
 import com.sz.mockbean.service.MockBeanConfigService;
+import com.sz.mockbean.service.MockBeanService;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -34,6 +36,8 @@ public class MockBeanServerHolder implements InitializingBean {
 
     @Autowired
     private MockBeanConfigService mockBeanConfigService;
+    @Autowired
+    private MockBeanService mockBeanService;
 
 
     @Override
@@ -80,7 +84,9 @@ public class MockBeanServerHolder implements InitializingBean {
                         mockBeanConfigService.bulkCreateMockBeanConfig(JSON.parseArray(mbp.getMsg(), MockBeanRegisterConfig.class));
                         break;
                     case "request":
-                        log.info("request");
+                        log.info(JSON.toJSONString(mbp));
+                        String result = mockBeanService.pull(JSON.parseObject(mbp.getMsg(), MockBeanModel.class));
+                        ctx.channel().writeAndFlush(JSON.toJSONString(genMockBeanProtocal(mbp.getSeqId(), result, "request")));
                         break;
                     default:
                         log.info("unknow message");
@@ -91,5 +97,13 @@ public class MockBeanServerHolder implements InitializingBean {
             }
 
         }
+    }
+
+    private MockBeanProtocal genMockBeanProtocal(String seqId, String msg, String action) {
+        MockBeanProtocal mockBeanProtocal = new MockBeanProtocal();
+        mockBeanProtocal.setSeqId(seqId);
+        mockBeanProtocal.setMsg(msg);
+        mockBeanProtocal.setAction(action);
+        return mockBeanProtocal;
     }
 }

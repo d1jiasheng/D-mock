@@ -1,8 +1,8 @@
 package com.sz.mockbean.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.sz.mockbean.model.MockBeanClientHolder;
 import com.sz.mockbean.model.MockModel;
-import com.sz.mockbean.other.MockBeanClientHolder;
 import com.sz.mockbean.request.MockBeanProtocal;
 import com.sz.mockbean.service.DemoService;
 import lombok.extern.slf4j.Slf4j;
