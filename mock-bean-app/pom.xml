@@ -20,7 +20,7 @@
     <!-- 依赖 -->
     <dependencies>
         <dependency>
-            <groupId>com.sz</groupId>
+            <groupId>io.github.d1jiasheng.mockbean</groupId>
             <artifactId>mock-bean-starter</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
