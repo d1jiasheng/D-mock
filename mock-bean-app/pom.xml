@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>mock-bean</artifactId>
-        <groupId>com.sz</groupId>
+        <groupId>com.jd</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -20,7 +20,7 @@
     <!-- 依赖 -->
     <dependencies>
         <dependency>
-            <groupId>io.github.d1jiasheng.mockbean</groupId>
+            <groupId>com.jd</groupId>
             <artifactId>mock-bean-starter</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>

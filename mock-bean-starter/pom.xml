@@ -4,19 +4,19 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>mock-bean</artifactId>
-        <groupId>com.sz</groupId>
+        <groupId>com.jd</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.github.d1jiasheng.mockbean</groupId>
+    <groupId>com.jd</groupId>
     <artifactId>mock-bean-starter</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
-            <groupId>io.github.d1jiasheng.mockbean</groupId>
+            <groupId>com.jd</groupId>
             <artifactId>mock-bean-core</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
@@ -48,6 +48,7 @@
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.2.0</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -61,120 +62,154 @@
         </dependency>
     </dependencies>
 
-    <url>https://github.com/d1jiasheng</url>
-    <!-- 开源签名证书 -->
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-    <!-- 仓库信息 -->
-    <scm>
-        <connection>scm:git@github.com:d1jiasheng/d-mock.git</connection>
-        <developerConnection>scm:git@github.com:d1jiasheng/d-mock.git
-        </developerConnection>
-        <url>https://github.com/d1jiasheng/d-mock</url>
-    </scm>
-    <!-- 开发人员信息 -->
-    <developers>
-        <developer>
-            <name>dijiasheng</name>
-            <email>dijiasheng@jd.com</email>
-            <organization>https://github.com/d1jiasheng</organization>
-            <timezone>+8</timezone>
-        </developer>
-    </developers>
-    <!-- 发布项目到 sonatype -->
-    <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>ossrh</id>
-            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>
+    <!--<url>https://github.com/d1jiasheng</url>-->
+    <!--&lt;!&ndash; 开源签名证书 &ndash;&gt;-->
+    <!--<licenses>-->
+    <!--<license>-->
+    <!--<name>The Apache Software License, Version 2.0</name>-->
+    <!--<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>-->
+    <!--<distribution>repo</distribution>-->
+    <!--</license>-->
+    <!--</licenses>-->
+    <!--&lt;!&ndash; 仓库信息 &ndash;&gt;-->
+    <!--<scm>-->
+    <!--<connection>scm:git@github.com:d1jiasheng/d-mock.git</connection>-->
+    <!--<developerConnection>scm:git@github.com:d1jiasheng/d-mock.git-->
+    <!--</developerConnection>-->
+    <!--<url>https://github.com/d1jiasheng/d-mock</url>-->
+    <!--</scm>-->
+    <!--&lt;!&ndash; 开发人员信息 &ndash;&gt;-->
+    <!--<developers>-->
+    <!--<developer>-->
+    <!--<name>dijiasheng</name>-->
+    <!--<email>dijiasheng@jd.com</email>-->
+    <!--<organization>https://github.com/d1jiasheng</organization>-->
+    <!--<timezone>+8</timezone>-->
+    <!--</developer>-->
+    <!--</developers>-->
+    <!--&lt;!&ndash; 发布项目到 sonatype &ndash;&gt;-->
+    <!--<distributionManagement>-->
+    <!--<snapshotRepository>-->
+    <!--<id>ossrh</id>-->
+    <!--<url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>-->
+    <!--</snapshotRepository>-->
+    <!--<repository>-->
+    <!--<id>ossrh</id>-->
+    <!--<url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>-->
+    <!--</repository>-->
+    <!--</distributionManagement>-->
+
+    <!--<build>-->
+    <!--<pluginManagement>-->
+    <!--<plugins>-->
+    <!--<plugin>-->
+    <!--<groupId>org.springframework.boot</groupId>-->
+    <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
+    <!--<configuration>-->
+    <!--<mainClass>none</mainClass>     &lt;!&ndash; 取消查找本项目下的Main方法：为了解决Unable to find main class的问题 &ndash;&gt;-->
+    <!--<classifier>execute</classifier>    &lt;!&ndash; 为了解决依赖模块找不到此模块中的类或属性 &ndash;&gt;-->
+    <!--</configuration>-->
+    <!--</plugin>-->
+    <!--<plugin>-->
+    <!--<groupId>org.apache.maven.plugins</groupId>-->
+    <!--<artifactId>maven-compiler-plugin</artifactId>-->
+    <!--<configuration>-->
+    <!--<encoding>utf-8</encoding>-->
+    <!--<source>8</source>-->
+    <!--<target>8</target>-->
+    <!--</configuration>-->
+    <!--</plugin>-->
+    <!--<plugin>-->
+    <!--<groupId>org.sonatype.plugins</groupId>-->
+    <!--<artifactId>nexus-staging-maven-plugin</artifactId>-->
+    <!--<version>1.6.7</version>-->
+    <!--<extensions>true</extensions>-->
+    <!--<configuration>-->
+    <!--<serverId>ossrh</serverId>-->
+    <!--<nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>-->
+    <!--<autoReleaseAfterClose>true</autoReleaseAfterClose>-->
+    <!--</configuration>-->
+    <!--</plugin>-->
+    <!--&lt;!&ndash; 生成java source.jar &ndash;&gt;-->
+    <!--<plugin>-->
+    <!--<groupId>org.apache.maven.plugins</groupId>-->
+    <!--<artifactId>maven-source-plugin</artifactId>-->
+    <!--<version>2.2.1</version>-->
+    <!--<executions>-->
+    <!--<execution>-->
+    <!--<id>attach-sources</id>-->
+    <!--<goals>-->
+    <!--<goal>jar-no-fork</goal>-->
+    <!--</goals>-->
+    <!--</execution>-->
+    <!--</executions>-->
+    <!--</plugin>-->
+    <!--<plugin>-->
+    <!--<groupId>org.apache.maven.plugins</groupId>-->
+    <!--<artifactId>maven-gpg-plugin</artifactId>-->
+    <!--<version>1.5</version>-->
+    <!--<executions>-->
+    <!--<execution>-->
+    <!--<id>sign-artifacts</id>-->
+    <!--<phase>verify</phase>-->
+    <!--<goals>-->
+    <!--<goal>sign</goal>-->
+    <!--</goals>-->
+    <!--</execution>-->
+    <!--</executions>-->
+    <!--</plugin>-->
+    <!--<plugin>-->
+    <!--<groupId>org.apache.maven.plugins</groupId>-->
+    <!--<artifactId>maven-javadoc-plugin</artifactId>-->
+    <!--<version>2.9.1</version>-->
+    <!--<configuration>-->
+    <!--<show>private</show>-->
+    <!--<nohelp>true</nohelp>-->
+    <!--<charset>UTF-8</charset>-->
+    <!--<encoding>UTF-8</encoding>-->
+    <!--<docencoding>UTF-8</docencoding>-->
+    <!--&lt;!&ndash; TODO 临时解决不规范的javadoc生成报错,后面要规范化后把这行去掉 &ndash;&gt;-->
+    <!--<additionalparam>-Xdoclint:none</additionalparam>-->
+    <!--</configuration>-->
+    <!--<executions>-->
+    <!--<execution>-->
+    <!--<phase>package</phase>-->
+    <!--<goals>-->
+    <!--<goal>jar</goal>-->
+    <!--</goals>-->
+    <!--</execution>-->
+    <!--</executions>-->
+    <!--</plugin>-->
+    <!--</plugins>-->
+    <!--</pluginManagement>-->
+    <!--</build>-->
 
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <encoding>utf-8</encoding>
-                    <source>8</source>
-                    <target>8</target>
-                </configuration>
+                <version>2.3.2</version>
             </plugin>
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.7</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <serverId>ossrh</serverId>
-                    <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                </configuration>
-            </plugin>
-            <!-- 生成java source.jar -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>2.2.1</version>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar-no-fork</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.5</version>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.9.1</version>
-                <configuration>
-                    <show>private</show>
-                    <nohelp>true</nohelp>
-                    <charset>UTF-8</charset>
-                    <encoding>UTF-8</encoding>
-                    <docencoding>UTF-8</docencoding>
-                    <!-- TODO 临时解决不规范的javadoc生成报错,后面要规范化后把这行去掉 -->
-                    <additionalparam>-Xdoclint:none</additionalparam>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <version>3.0.1</version>
             </plugin>
         </plugins>
     </build>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>JD-snapshots</id>
+            <name>JD maven2 repository-snapshots</name>
+            <url>http://artifactory.jd.com/libs-snapshots-local</url>
+        </snapshotRepository>
+        <repository>
+            <id>JD-releases</id>
+            <name>JD maven2 repository-releases</name>
+            <url>http://artifactory.jd.com/libs-releases-local</url>
+        </repository>
+    </distributionManagement>
 
 </project>

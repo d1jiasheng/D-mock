@@ -4,11 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>mock-bean</artifactId>
-        <groupId>com.sz</groupId>
+        <groupId>com.jd</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>io.github.d1jiasheng.mockbean</groupId>
+    <groupId>com.jd</groupId>
     <artifactId>mock-bean-core</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -92,7 +92,7 @@
             <!--<timezone>+8</timezone>-->
         <!--</developer>-->
     <!--</developers>-->
-    <!--&lt;!&ndash; 发布项目到 sonatype &ndash;&gt;-->
+    <!-- 发布项目到 sonatype -->
     <!--<distributionManagement>-->
         <!--<snapshotRepository>-->
             <!--<id>ossrh</id>-->
@@ -188,5 +188,33 @@
             <!--</plugins>-->
         <!--</pluginManagement>-->
     <!--</build>-->
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
+            </plugin>
+        </plugins>
+    </build>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>JD-snapshots</id>
+            <name>JD maven2 repository-snapshots</name>
+            <url>http://artifactory.jd.com/libs-snapshots-local</url>
+        </snapshotRepository>
+        <repository>
+            <id>JD-releases</id>
+            <name>JD maven2 repository-releases</name>
+            <url>http://artifactory.jd.com/libs-releases-local</url>
+        </repository>
+    </distributionManagement>
 
 </project>
