@@ -12,4 +12,4 @@ mybatis:
     map-underscore-to-camel-case: true
     default-statement-timeout: 120
 server:
-  port: 9001
+  port: 8080

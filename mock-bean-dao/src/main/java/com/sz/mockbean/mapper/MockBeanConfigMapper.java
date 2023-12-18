@@ -55,4 +55,10 @@ public interface MockBeanConfigMapper {
     })
     List<MockBeanConfig> bulkSelectByAppNameAndBeanIds(@Param("appName") String appName,
                                                        @Param("beanIds") List<Long> beanIds);
+
+    @Select({"<script>",
+            " select * from mockbean_config order by id desc limit #{start}, #{pageSize}",
+            " </script>"
+    })
+    List<MockBeanConfig> selectPage(@Param("start") int start, @Param("pageSize") int pageSize);
 }

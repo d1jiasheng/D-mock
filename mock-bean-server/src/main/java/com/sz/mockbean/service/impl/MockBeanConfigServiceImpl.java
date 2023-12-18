@@ -1,10 +1,11 @@
 package com.sz.mockbean.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.fasterxml.jackson.databind.util.BeanUtil;
 import com.sz.mockbean.mapper.MockBeanConfigMapper;
 import com.sz.mockbean.model.MockBeanRegisterConfig;
 import com.sz.mockbean.model.MockBeanReturnParam;
+import com.sz.mockbean.model.request.PageRequest;
+import com.sz.mockbean.model.response.PageResult;
 import com.sz.mockbean.model.vo.MockBeanRegisterConfigVo;
 import com.sz.mockbean.po.MockBeanConfig;
 import com.sz.mockbean.po.MockBeanConfigExample;
@@ -68,6 +69,15 @@ public class MockBeanConfigServiceImpl implements MockBeanConfigService {
             target.setMockBeanReturnParamList(JSON.parseArray(item.getMethodParameter(), MockBeanReturnParam.class));
             return target;
         }).collect(Collectors.toList());
+    }
+
+    @Override
+    public PageResult<MockBeanConfig> getAllMockConfig(PageRequest req) {
+        MockBeanConfigExample example = new MockBeanConfigExample();
+        example.createCriteria().andIsDeleteEqualTo(0);
+        long totalCount = mockBeanConfigMapper.countByExample(example);
+        List<MockBeanConfig> mockBeanConfigs = mockBeanConfigMapper.selectPage(req.start(), req.getPageSize());
+        return new PageResult<>(totalCount, mockBeanConfigs);
     }
 
     private String genParameterStr(List<String> parameters) {
