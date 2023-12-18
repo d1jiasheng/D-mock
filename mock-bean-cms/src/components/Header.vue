@@ -28,6 +28,12 @@
             <td>{{beanConfig.beanName}}</td>
             <td>{{beanConfig.className}}</td>
             <td>{{beanConfig.methodName}}</td>
+            <td>
+              <router-link style="font-size: 14px"
+                           :to="{name: 'BeanConfigDetail', params: { beanConfigId: beanConfig.id}}"
+              >查看配置
+              </router-link>
+            </td>
           </tr>
           </tbody>
         </table>

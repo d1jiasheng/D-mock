@@ -2,6 +2,7 @@ package com.sz.mockbean.service;
 
 import com.sz.mockbean.model.MockBeanModel;
 import com.sz.mockbean.model.WriteValueModel;
+import com.sz.mockbean.model.vo.MockBeanConfigVo;
 import com.sz.mockbean.po.MockBean;
 
 import java.util.Optional;
@@ -19,6 +20,12 @@ public interface MockBeanService {
     String pull(MockBeanModel mockBeanModel);
 
     Optional<MockBean> getBeanModel(MockBeanModel mockBeanModel);
+
+    MockBean getMockBean(String appName, Long beanId);
+
+    boolean updateMockBean(MockBeanConfigVo configVo);
+
+    boolean createMockBean(MockBeanConfigVo configVo);
 
 
 }

@@ -1,5 +1,8 @@
 package com.sz.mockbean.constant;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 /**
  * @author dijiasheng
  * @date 2023/12/14
@@ -7,8 +10,7 @@ package com.sz.mockbean.constant;
 public enum MockBeanReturnTypeEnum {
     OBJECT(0, "Object"),
     STRING(1, "String"),
-    INTEGER(2, "Integer"),
-    ;
+    INTEGER(2, "Integer"),;
 
     private Integer code;
 
@@ -33,5 +35,9 @@ public enum MockBeanReturnTypeEnum {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public static Optional<MockBeanReturnTypeEnum> getByCode(Integer code) {
+        return Arrays.stream(MockBeanReturnTypeEnum.values()).filter(item -> code.equals(item.getCode())).findFirst();
     }
 }

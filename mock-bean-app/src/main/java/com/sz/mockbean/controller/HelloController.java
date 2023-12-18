@@ -1,5 +1,6 @@
 package com.sz.mockbean.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.sz.mockbean.model.MockBeanClientHolder;
 import com.sz.mockbean.model.MockModel;
 import com.sz.mockbean.request.MockBeanProtocal;
@@ -40,7 +41,7 @@ public class HelloController {
     @PostMapping("mockBeanTest")
     @ResponseBody
     public String mockBeanTest() {
-        String mockModel = newDemoService.newMock();
-        return mockModel;
+        MockModel mockModel = demoService.mock();
+        return JSON.toJSONString(mockModel);
     }
 }

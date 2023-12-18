@@ -17,6 +17,12 @@ export default new Router({
         { path: 'project', component: Project },
         { path: 'bean', component: Bean },
       ]
-    }
+    },
+    {
+      path: '/static/beanConfigDetail/:beanConfigId',
+      name: 'BeanConfigDetail',
+      component: () => import('../components/BeanConfigDetail.vue')
+    },
+
   ]
 })

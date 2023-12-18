@@ -5,6 +5,9 @@ import com.sz.mockbean.model.MockModel;
 import com.sz.mockbean.service.DemoService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author dijiasheng
  * @date 2023/4/20
@@ -12,11 +15,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class DemoServiceImpl implements DemoService {
 
-    @MockBean(beanId = 881)
+    @MockBean(beanId = 8890)
     @Override
     public MockModel mock() {
         MockModel m = new MockModel();
+        List<String> l = new ArrayList<>();
+        l.add("111");
+        l.add("222");
         m.setName("我试一试最近的值");
+        m.setList(l);
         return m;
     }
 
